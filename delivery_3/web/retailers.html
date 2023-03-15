@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>List retailers - Flask </title>
+</head>
+<body style="padding:20px">
+{% if cursor %}
+    <table border="2px">
+        <thead>
+            <tr>
+                <th>nome</th>
+                <th>tin</th>
+                <th>Adicionar Categoria </th>
+                <th>Remover Categoria </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor %}
+                <tr>
+                    <td>{{ record[0] }} </td>
+                    <td>{{ record[1] }} </td>
+                    <td><a href="retailer/remove?nome={ { record[0] }& { record[1] }}">Remover retalhista </a> </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p> Erro: não foi possível obter dados da base de dados! </p>
+{% endif %}
+<div>
+    <button onclick="window.location.href='add_retailer?nome,tin={{ params.get('nome') }&{ params.get('tin')}}'">Adicionar retalhista</button>
+</div>
+</body>
+</html>

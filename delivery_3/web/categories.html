@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>List accounts - Flask </title>
+</head>
+<body style="padding:20px">
+{% if cursor %}
+    <table border="2px">
+        <thead>
+            <tr>
+                <th>nome </th>
+                <th>Adicionar Categoria </th>
+                <th>Remover Categoria </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor %}
+                <tr>
+                    <td>{{ record[0] }} </td>
+                    <td><a href="categories/remove?nome={{ record[0] }}">Remover Catergoria </a> </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p> Erro: não foi possível obter dados da base de dados! </p>
+{% endif %}
+<div>
+    <button onclick="window.location.href='add_category?nome={{ params.get('nome') }}'">Adicionar categoria</button>
+</div>
+
+</body>
+</html>
